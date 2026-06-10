@@ -12,6 +12,7 @@ import { sampleResume } from './data/sampleResume';
 function App() {
   const [resumeData, setResumeData] = useState(loadResumeData());
   const [zoom, setZoom] = useState(90);
+  const [activeSection, setActiveSection] = useState('design');
   const fileInputRef = useRef(null);
   const resumeRef = useRef(null);
 
@@ -209,6 +210,8 @@ function App() {
           <ResumeEditor 
             resumeData={resumeData} 
             onChange={setResumeData} 
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
           />
         </section>
 
@@ -231,6 +234,15 @@ function App() {
               <ResumePreview 
                 data={resumeData} 
                 ref={resumeRef} 
+                onSectionClick={(sectionKey) => {
+                  setActiveSection(sectionKey);
+                  setTimeout(() => {
+                    const sectionEl = document.querySelector(`.editor-pane [data-section-key="${sectionKey}"]`);
+                    if (sectionEl) {
+                      sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 80);
+                }}
               />
             </div>
           </div>

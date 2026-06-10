@@ -1328,3 +1328,30 @@ textarea.form-control {
   border-top: 1px solid var(--border-color);
   padding-top: 1rem;
 }
+
+/* Click-to-Edit Visual Hints (Screen Only) */
+@media screen {
+  .resume-paper .section,
+  .resume-paper .header {
+    cursor: pointer;
+    position: relative;
+    transition: outline 0.12s ease, background-color 0.12s ease;
+    border-radius: 4px;
+  }
+  .resume-paper .section:hover,
+  .resume-paper .header:hover {
+    outline: 1.5px dashed rgba(99, 102, 241, 0.35);
+    outline-offset: 3px;
+    background-color: rgba(99, 102, 241, 0.015);
+  }
+}
+
+/* Keep Print outputs pristine */
+@media print {
+  .resume-paper .section,
+  .resume-paper .header {
+    outline: none !important;
+    background-color: transparent !important;
+    cursor: default !important;
+  }
+}

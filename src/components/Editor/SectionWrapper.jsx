@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const SectionWrapper = ({ title, icon: Icon, isOpen, onToggle, children }) => {
+const SectionWrapper = ({ title, icon: Icon, isOpen, onToggle, children, ...rest }) => {
   return (
-    <div className="accordion-item">
+    <div className="accordion-item" {...rest}>
       <div className="accordion-header" onClick={onToggle}>
         <div className="accordion-title">
           {Icon && <Icon size={18} />}

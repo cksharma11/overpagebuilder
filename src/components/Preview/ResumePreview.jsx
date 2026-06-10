@@ -16,7 +16,7 @@ import DoubleColumnTemplate from '../Templates/DoubleColumnTemplate';
 import WarmMinimalTemplate from '../Templates/WarmMinimalTemplate';
 import EliteCorporateTemplate from '../Templates/EliteCorporateTemplate';
 
-const ResumePreview = React.forwardRef(({ data }, ref) => {
+const ResumePreview = React.forwardRef(({ data, onSectionClick }, ref) => {
   const { settings = {} } = data;
 
   useEffect(() => {
@@ -250,6 +250,43 @@ const ResumePreview = React.forwardRef(({ data }, ref) => {
 
   const marginVal = getMarginValue();
 
+  const handlePreviewClick = (e) => {
+    // If clicking on links or interactive elements inside the template, let them function normally
+    if (e.target.tagName === 'A' || e.target.closest('a')) {
+      return;
+    }
+
+    const sectionEl = e.target.closest('.section');
+    if (!sectionEl) {
+      // If click was in the header or outside sections, open personal info
+      if (onSectionClick) {
+        onSectionClick('personal');
+      }
+      return;
+    }
+
+    // Identify the section by looking at its title element text content
+    const titleEl = sectionEl.querySelector('.section-title, .sidebar-section-title, h2, h3');
+    if (titleEl && onSectionClick) {
+      const text = titleEl.textContent.toLowerCase();
+      if (text.includes('experience') || text.includes('work') || text.includes('employment') || text.includes('history')) {
+        onSectionClick('experience');
+      } else if (text.includes('education')) {
+        onSectionClick('education');
+      } else if (text.includes('project')) {
+        onSectionClick('projects');
+      } else if (text.includes('skill')) {
+        onSectionClick('skills');
+      } else if (text.includes('certif') || text.includes('award') || text.includes('training')) {
+        onSectionClick('certifications');
+      } else if (text.includes('language')) {
+        onSectionClick('languages');
+      } else if (text.includes('summary') || text.includes('profile') || text.includes('objective') || text.includes('about')) {
+        onSectionClick('personal');
+      }
+    }
+  };
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
@@ -265,6 +302,7 @@ const ResumePreview = React.forwardRef(({ data }, ref) => {
         id="printable-resume-sheet"
         className={paperClasses}
         style={inlineStyles}
+        onClick={handlePreviewClick}
       >
         {renderSelectedTemplate()}
         {/* Visual page break guides (hidden in print via CSS and ignored by PDF downloader) */}

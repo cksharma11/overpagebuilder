@@ -12,11 +12,17 @@ import SkillsSection from './SkillsSection';
 import LanguagesSection from './LanguagesSection';
 import CertificationsSection from './CertificationsSection';
 
-const ResumeEditor = ({ resumeData, onChange }) => {
-  const [activeSection, setActiveSection] = useState('design');
+const ResumeEditor = ({ resumeData, onChange, activeSection, setActiveSection }) => {
+  const [localActiveSection, setLocalActiveSection] = useState('design');
+
+  const currentActiveSection = activeSection !== undefined ? activeSection : localActiveSection;
 
   const toggleSection = (sectionName) => {
-    setActiveSection(activeSection === sectionName ? null : sectionName);
+    if (setActiveSection) {
+      setActiveSection(currentActiveSection === sectionName ? null : sectionName);
+    } else {
+      setLocalActiveSection(localActiveSection === sectionName ? null : sectionName);
+    }
   };
 
   const handleUpdateField = (sectionKey, value) => {
@@ -32,8 +38,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Design & Template Settings"
         icon={Sliders}
-        isOpen={activeSection === 'design'}
+        isOpen={currentActiveSection === 'design'}
         onToggle={() => toggleSection('design')}
+        data-section-key="design"
       >
         <DesignSettings
           settings={resumeData.settings}
@@ -45,8 +52,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Rearrange Section Order"
         icon={ArrowUpDown}
-        isOpen={activeSection === 'order'}
+        isOpen={currentActiveSection === 'order'}
         onToggle={() => toggleSection('order')}
+        data-section-key="order"
       >
         <SectionOrderManager
           sectionOrder={resumeData.settings.sectionOrder || []}
@@ -62,8 +70,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Contact & Personal Info"
         icon={User}
-        isOpen={activeSection === 'personal'}
+        isOpen={currentActiveSection === 'personal'}
         onToggle={() => toggleSection('personal')}
+        data-section-key="personal"
       >
         <PersonalInfo
           data={resumeData.personalInfo}
@@ -75,8 +84,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Work Experience"
         icon={Briefcase}
-        isOpen={activeSection === 'experience'}
+        isOpen={currentActiveSection === 'experience'}
         onToggle={() => toggleSection('experience')}
+        data-section-key="experience"
       >
         <ExperienceSection
           items={resumeData.workExperience}
@@ -88,8 +98,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Education"
         icon={GraduationCap}
-        isOpen={activeSection === 'education'}
+        isOpen={currentActiveSection === 'education'}
         onToggle={() => toggleSection('education')}
+        data-section-key="education"
       >
         <EducationSection
           items={resumeData.education}
@@ -101,8 +112,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Key Projects"
         icon={Code}
-        isOpen={activeSection === 'projects'}
+        isOpen={currentActiveSection === 'projects'}
         onToggle={() => toggleSection('projects')}
+        data-section-key="projects"
       >
         <ProjectsSection
           items={resumeData.projects}
@@ -114,8 +126,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Core Skills"
         icon={Wrench}
-        isOpen={activeSection === 'skills'}
+        isOpen={currentActiveSection === 'skills'}
         onToggle={() => toggleSection('skills')}
+        data-section-key="skills"
       >
         <SkillsSection
           items={resumeData.skills}
@@ -127,8 +140,9 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Languages"
         icon={Globe}
-        isOpen={activeSection === 'languages'}
+        isOpen={currentActiveSection === 'languages'}
         onToggle={() => toggleSection('languages')}
+        data-section-key="languages"
       >
         <LanguagesSection
           items={resumeData.languages}
@@ -140,14 +154,28 @@ const ResumeEditor = ({ resumeData, onChange }) => {
       <SectionWrapper
         title="Certifications & Awards"
         icon={Award}
-        isOpen={activeSection === 'certifications'}
+        isOpen={currentActiveSection === 'certifications'}
         onToggle={() => toggleSection('certifications')}
+        data-section-key="certifications"
       >
         <CertificationsSection
           items={resumeData.certifications}
           onChange={(val) => handleUpdateField('certifications', val)}
         />
       </SectionWrapper>
+
+      {/* Copyright Footer */}
+      <div style={{ 
+        marginTop: '1.5rem', 
+        textAlign: 'center', 
+        fontSize: '0.75rem', 
+        color: 'var(--text-muted)',
+        borderTop: '1px solid var(--border-color)',
+        paddingTop: '1.25rem',
+        letterSpacing: '0.5px'
+      }}>
+        © {new Date().getFullYear()} cksharma11. All rights reserved.
+      </div>
     </div>
   );
 };
