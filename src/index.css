@@ -1,0 +1,1330 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* Editor Theme Variables (Elegant Dark Mode) */
+  --bg-app: #0b0f19;
+  --bg-sidebar: #111827;
+  --bg-card: #1f2937;
+  --bg-input: #374151;
+  --border-color: #374151;
+  --border-color-focus: #6366f1;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  --accent-color: #6366f1;
+  --accent-hover: #4f46e5;
+  --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --success-color: #10b981;
+  --success-hover: #059669;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  --font-editor: 'Inter', -apple-system, sans-serif;
+  
+  /* Resume Document Standards */
+  --resume-width: 8.27in; /* A4 standard width */
+  --resume-height: 11.69in; /* A4 standard height */
+  
+  /* Available Font Choices */
+  --font-eb-garamond: 'EB Garamond', 'Lora', Georgia, serif;
+  --font-inter: 'Inter', 'Outfit', sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-merriweather: 'Merriweather', serif;
+  --font-ibm-plex: 'IBM Plex Sans', sans-serif;
+  --font-libre-baskerville: 'Libre Baskerville', serif;
+
+  /* Resume Settings variables (overridden dynamically by template or controls) */
+  --resume-font-serif: var(--font-eb-garamond);
+  --resume-font-sans: var(--font-inter);
+  --resume-font-mono: var(--font-jetbrains-mono);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-editor);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Navbar */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 10;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #ffffff;
+  font-family: 'Outfit', sans-serif;
+}
+
+.logo span {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Buttons styling */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btn-secondary:hover {
+  background-color: var(--bg-input);
+  border-color: var(--text-secondary);
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+}
+
+.btn-icon-only {
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+}
+.btn-icon-only:hover {
+  background-color: var(--bg-input);
+}
+
+/* Split-screen Main Layout */
+.main-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left Editor Workspace */
+.editor-pane {
+  width: 45%;
+  min-width: 450px;
+  max-width: 650px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-settings-bar {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.editor-sections {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 5rem;
+}
+
+/* Right Preview Workspace */
+.preview-pane {
+  flex: 1;
+  background-color: var(--bg-app);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-image: radial-gradient(rgba(99, 102, 241, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.preview-toolbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+  z-index: 5;
+}
+
+.preview-container {
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+  width: 100%;
+}
+
+/* Paper Emulation Wrapper */
+.resume-paper-wrapper {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+  color: #1e293b;
+  position: relative;
+  transform-origin: top center;
+  transition: transform 0.2s ease;
+  overflow: hidden; /* Clips the page break guides to the physical A4 paper boundaries */
+}
+
+/* Standard Resume sheet styling in Editor view */
+.resume-paper {
+  width: var(--resume-width);
+  min-height: var(--resume-height);
+  padding: 0.6in 0.6in 0.6in 0.6in;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible; /* Let content grow naturally */
+  text-align: left;
+}
+
+/* Page break guides (only shown on screen) */
+.page-break-guide-1,
+.page-break-guide-2 {
+  position: absolute;
+  left: -2in;
+  right: -2in;
+  height: 24px;
+  background-color: var(--bg-app);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 7.5pt;
+  font-weight: 600;
+  font-family: var(--font-editor);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.35);
+}
+
+.page-break-guide-1 {
+  top: var(--resume-height);
+}
+.page-break-guide-2 {
+  top: calc(var(--resume-height) * 2);
+}
+
+/* Padding Sizes */
+.resume-paper.margin-compact {
+  padding: 0.4in 0.4in 0.3in 0.4in;
+}
+.resume-paper.margin-normal {
+  padding: 0.6in 0.6in 0.4in 0.6in;
+}
+.resume-paper.margin-relaxed {
+  padding: 0.8in 0.8in 0.5in 0.8in;
+}
+
+/* Font Size Scales */
+.resume-paper.size-small {
+  font-size: 9.5pt;
+  line-height: 1.25;
+}
+.resume-paper.size-medium {
+  font-size: 10.5pt;
+  line-height: 1.35;
+}
+.resume-paper.size-large {
+  font-size: 11.5pt;
+  line-height: 1.45;
+}
+
+/* Editor Form Styling */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.form-control:focus {
+  border-color: var(--border-color-focus);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+/* Collapsible Form Section Wrapper */
+.accordion-item {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.accordion-item:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: rgba(31, 41, 55, 0.5);
+}
+
+.accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.accordion-title svg {
+  color: var(--accent-color);
+}
+
+.accordion-content {
+  padding: 1.25rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Dynamic list editor styling (experiences, projects lists) */
+.list-item-card {
+  border: 1px solid var(--border-color);
+  background-color: rgba(17, 24, 39, 0.4);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.list-item-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.list-item-card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.list-item-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.list-item-actions-order {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.btn-mini {
+  padding: 0.25rem;
+  font-size: 0.7rem;
+  border-radius: 4px;
+}
+
+/* Settings Bar layout */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--bg-card);
+  padding: 0.4rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.color-input {
+  border: none;
+  background: none;
+  width: 36px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.color-label {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Preset circles for styling */
+.presets-row {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.preset-color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.1s ease;
+}
+
+.preset-color-dot:hover {
+  transform: scale(1.15);
+}
+
+.preset-color-dot.active {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+/* Template Cards Grid */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.template-card {
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-card);
+  border-radius: 6px;
+  padding: 0.75rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.template-card.active {
+  border-color: var(--accent-color);
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.template-card-preview-thumb {
+  height: 80px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.template-card-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Thumbnails visual decoration */
+.thumb-line {
+  background-color: #e2e8f0;
+  height: 4px;
+  width: 70%;
+  border-radius: 2px;
+}
+.thumb-title {
+  background-color: #94a3b8;
+  height: 8px;
+  width: 40%;
+  border-radius: 2px;
+}
+
+/* Custom file input */
+.file-upload-input {
+  display: none;
+}
+
+/* Responsive Zoom controls styling */
+.zoom-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--bg-card);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+}
+
+.zoom-slider-container input[type="range"] {
+  width: 100px;
+  accent-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.zoom-value {
+  font-size: 0.8rem;
+  font-family: var(--resume-font-mono);
+  color: var(--text-primary);
+  width: 32px;
+  text-align: right;
+}
+
+/* ==========================================================================
+   RESUME TEMPLATE STYLES (Applies strictly inside .resume-paper)
+   ========================================================================== */
+
+/* Shared Styles inside preview paper */
+.resume-paper h1, 
+.resume-paper h2, 
+.resume-paper h3, 
+.resume-paper h4 {
+  color: var(--theme-color, #1e293b);
+  margin: 0;
+}
+
+/* Links must look professional */
+.resume-paper a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--theme-color, #1e293b);
+}
+
+.resume-paper p, 
+.resume-paper li {
+  color: #334155;
+  margin-bottom: 0;
+}
+
+.resume-paper ul {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+}
+
+.resume-paper li {
+  margin-bottom: 0.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   TEMPLATE 1: ACADEMIC (LaTeX / Overleaf style)
+   -------------------------------------------------------------------------- */
+.tmpl-academic {
+  font-family: var(--resume-font-serif);
+}
+
+.tmpl-academic .header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.tmpl-academic .header h1 {
+  font-size: 24pt;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  color: #000000;
+  margin-bottom: 0.25rem;
+}
+
+.tmpl-academic .header-title {
+  font-size: 11pt;
+  font-style: italic;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.tmpl-academic .contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.85rem;
+  row-gap: 0.25rem;
+  font-size: 9pt;
+}
+
+.tmpl-academic .contact-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+/* LaTeX bullet divider */
+.tmpl-academic .contact-info span:not(:last-child)::after {
+  content: "  • ";
+  color: #94a3b8;
+  margin-left: 0.85rem;
+}
+
+.tmpl-academic .section-title {
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 0.15rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.65rem;
+  color: var(--theme-color, #000000);
+}
+
+.tmpl-academic .summary-text {
+  font-size: 9.5pt;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+.tmpl-academic .item-row {
+  margin-bottom: 0.75rem;
+  page-break-inside: avoid;
+}
+
+.tmpl-academic .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-baseline;
+  font-weight: bold;
+  font-size: 10pt;
+  margin-bottom: 0.15rem;
+}
+
+.tmpl-academic .item-subheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-baseline;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.tmpl-academic .item-details {
+  font-size: 9pt;
+  line-height: 1.35;
+}
+
+.tmpl-academic .skills-row {
+  margin-bottom: 0.45rem;
+  font-size: 9.5pt;
+  line-height: 1.35;
+}
+
+.tmpl-academic .skills-category {
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   TEMPLATE 2: MODERN EXECUTIVE
+   -------------------------------------------------------------------------- */
+.tmpl-modern {
+  font-family: var(--resume-font-sans);
+}
+
+.tmpl-modern .header {
+  border-left: 6px solid var(--theme-color, #6366f1);
+  padding-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.tmpl-modern .header h1 {
+  font-size: 26pt;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+.tmpl-modern .header-title {
+  font-size: 12pt;
+  font-weight: 500;
+  color: var(--theme-color, #6366f1);
+  margin-bottom: 0.5rem;
+}
+
+.tmpl-modern .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.35rem;
+  font-size: 9pt;
+  color: #475569;
+  margin-top: 0.5rem;
+}
+
+.tmpl-modern .section-title {
+  font-size: 11pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--theme-color, #6366f1);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tmpl-modern .section-title::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: #f1f5f9;
+}
+
+.tmpl-modern .summary-text {
+  font-size: 9.5pt;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.tmpl-modern .item-row {
+  margin-bottom: 1rem;
+  page-break-inside: avoid;
+}
+
+.tmpl-modern .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
+}
+
+.tmpl-modern .item-title {
+  font-weight: 700;
+  font-size: 10pt;
+  color: #0f172a;
+}
+
+.tmpl-modern .item-meta {
+  font-size: 9pt;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.tmpl-modern .item-company-location {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 9pt;
+  color: var(--theme-color, #6366f1);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.tmpl-modern .item-company-location span:not(:last-child)::after {
+  content: " | ";
+  color: #cbd5e1;
+  margin-left: 0.5rem;
+}
+
+.tmpl-modern .item-details {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #334155;
+}
+
+.tmpl-modern .skill-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tmpl-modern .skill-group {
+  margin-bottom: 0.75rem;
+}
+
+.tmpl-modern .skill-group-title {
+  font-weight: bold;
+  font-size: 9pt;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   TEMPLATE 3: MINIMALIST
+   -------------------------------------------------------------------------- */
+.tmpl-minimalist {
+  font-family: var(--resume-font-sans);
+}
+
+.tmpl-minimalist .header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.tmpl-minimalist .header h1 {
+  font-size: 22pt;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.tmpl-minimalist .header-title {
+  font-size: 10.5pt;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tmpl-minimalist .contact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 8.5pt;
+  color: #64748b;
+  margin-top: 0.5rem;
+}
+
+.tmpl-minimalist .section-title {
+  font-size: 10pt;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1e293b;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tmpl-minimalist .summary-text {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.tmpl-minimalist .item-row {
+  margin-bottom: 0.75rem;
+  page-break-inside: avoid;
+}
+
+.tmpl-minimalist .item-header-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: baseline;
+  margin-bottom: 0.15rem;
+}
+
+.tmpl-minimalist .item-role-title {
+  font-weight: 600;
+  font-size: 9.5pt;
+  color: #1e293b;
+}
+
+.tmpl-minimalist .item-date-range {
+  text-align: right;
+  font-size: 8.5pt;
+  color: #94a3b8;
+}
+
+.tmpl-minimalist .item-company-info {
+  font-size: 8.5pt;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.tmpl-minimalist .item-details {
+  font-size: 8.5pt;
+  line-height: 1.35;
+  color: #475569;
+}
+
+.tmpl-minimalist .skills-line {
+  font-size: 8.5pt;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.tmpl-minimalist .skills-label {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* --------------------------------------------------------------------------
+   TEMPLATE 4: CREATIVE (Two Column)
+   -------------------------------------------------------------------------- */
+.tmpl-creative {
+  font-family: var(--resume-font-sans);
+}
+
+.tmpl-creative .creative-layout {
+  display: grid;
+  grid-template-columns: 2.2in 1fr;
+  column-gap: 0.4in;
+  min-height: calc(var(--resume-height) - 1.2in); /* Subtract padding */
+}
+
+/* Sidebar column */
+.tmpl-creative .sidebar {
+  border-right: 1px solid #e2e8f0;
+  padding-right: 0.25in;
+}
+
+.tmpl-creative .sidebar-section {
+  margin-bottom: 1.5rem;
+  page-break-inside: avoid;
+}
+
+.tmpl-creative .sidebar-section-title {
+  font-size: 9.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--theme-color, #6366f1);
+  border-bottom: 2px solid var(--theme-color, #6366f1);
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.tmpl-creative .contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 8.5pt;
+  color: #475569;
+  word-break: break-all;
+}
+
+.tmpl-creative .contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.tmpl-creative .contact-item svg {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  color: var(--theme-color, #6366f1);
+}
+
+.tmpl-creative .skill-pill-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tmpl-creative .skill-category-block {
+  font-size: 8.5pt;
+}
+
+.tmpl-creative .skill-cat-title {
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.15rem;
+}
+
+.tmpl-creative .lang-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8.5pt;
+  margin-bottom: 0.35rem;
+}
+
+/* Main column */
+.tmpl-creative .main-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.tmpl-creative .header {
+  margin-bottom: 1.25rem;
+}
+
+.tmpl-creative .header h1 {
+  font-size: 24pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  margin-bottom: 0.1rem;
+}
+
+.tmpl-creative .header-title {
+  font-size: 11.5pt;
+  font-weight: 500;
+  color: var(--theme-color, #6366f1);
+  margin-bottom: 0.5rem;
+}
+
+.tmpl-creative .summary-text {
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.tmpl-creative .section-title {
+  font-size: 11pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0f172a;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.tmpl-creative .section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--theme-color, #6366f1);
+}
+
+.tmpl-creative .item-row {
+  margin-bottom: 0.85rem;
+  page-break-inside: avoid;
+}
+
+.tmpl-creative .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.1rem;
+}
+
+.tmpl-creative .item-title {
+  font-weight: 700;
+  font-size: 9.5pt;
+  color: #0f172a;
+}
+
+.tmpl-creative .item-date {
+  font-size: 8.5pt;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.tmpl-creative .item-org {
+  font-size: 8.5pt;
+  color: var(--theme-color, #6366f1);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.tmpl-creative .item-details {
+  font-size: 8.5pt;
+  line-height: 1.35;
+  color: #334155;
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLES (Strict rules for physical page exporting)
+   ========================================================================== */
+@media print {
+  /* Hide all non-printable components */
+  body, html {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .app-header,
+  .editor-pane,
+  .preview-toolbar,
+  .zoom-slider-container,
+  .page-break-guide-1,
+  .page-break-guide-2 {
+    display: none !important;
+  }
+
+  .preview-container {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: none !important;
+  }
+
+  /* Make sure parent containers are invisible except the printable sheet */
+  .app-container,
+  .main-workspace,
+  .preview-pane {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Reset scale transform so printing happens at exactly 100% scale */
+  .resume-paper-wrapper {
+    transform: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    position: static !important;
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Paper specific styles */
+  .resume-paper {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    page-break-after: avoid !important;
+    page-break-inside: auto !important;
+  }
+  
+  /* Avoid section heading orphans at the page bottom */
+  .section-title,
+  h2,
+  h3 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* Allow experience/education items to break across pages, but prevent orphan headings and list-item splits */
+  .item-row {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .item-header,
+  .item-subheading {
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .item-details li,
+  .skills-row,
+  .skill-group,
+  .tmpl-creative .sidebar-section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Force browsers to print colored elements correctly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-scheme: light !important;
+  }
+}
+
+/* ==========================================================================
+   MODAL DIALOG STYLES (PDF Print Instructions Modal)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
+  animation: modal-fadeIn 0.2s ease-out;
+}
+
+@keyframes modal-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.modal-body {
+  margin-bottom: 1.75rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.modal-body p {
+  margin-bottom: 1rem;
+}
+
+.instruction-step {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--accent-color);
+}
+
+.step-num {
+  font-weight: 700;
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+.step-text {
+  color: var(--text-secondary);
+}
+
+.step-text strong {
+  color: #ffffff;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
