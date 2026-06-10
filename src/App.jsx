@@ -152,9 +152,26 @@ function App() {
     <div className="app-container">
       {/* Header bar */}
       <header className="app-header">
-        <div className="logo">
-          <FileText size={22} style={{ color: '#818cf8' }} />
-          <span>Overpage <span>Builder</span></span>
+        <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <FileText size={22} style={{ color: '#818cf8' }} />
+            <span>Overpage <span>Builder</span></span>
+          </div>
+          <span style={{ 
+            fontSize: '0.72rem', 
+            color: 'var(--text-secondary)', 
+            backgroundColor: 'rgba(255, 255, 255, 0.04)', 
+            padding: '0.2rem 0.5rem', 
+            borderRadius: '4px',
+            border: '1px solid var(--border-color)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '5px',
+            userSelect: 'none'
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'var(--success-color)' }}></span>
+            Autosaved
+          </span>
         </div>
         <div className="header-actions">
           <button type="button" className="btn btn-secondary" onClick={handleLoadSample}>
