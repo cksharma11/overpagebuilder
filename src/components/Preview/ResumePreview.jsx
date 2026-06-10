@@ -133,10 +133,26 @@ const ResumePreview = React.forwardRef(({ data }, ref) => {
       });
     };
 
-    // Run after a short delay to ensure DOM has fully rendered
-    const timer = setTimeout(adjustPageBreaks, 150);
-    return () => clearTimeout(timer);
-  }, [data, settings.margins]);
+    let active = true;
+    const runAdjustment = () => {
+      if (!active) return;
+      adjustPageBreaks();
+    };
+
+    // Run after a short delay, waiting for web fonts to load first if API is supported
+    const timer = setTimeout(() => {
+      if (document.fonts) {
+        document.fonts.ready.then(runAdjustment);
+      } else {
+        runAdjustment();
+      }
+    }, 150);
+
+    return () => {
+      active = false;
+      clearTimeout(timer);
+    };
+  }, [data, settings.margins, settings.fontFamily, settings.fontSize, settings.template]);
 
   const renderSelectedTemplate = () => {
     switch (settings.template) {
